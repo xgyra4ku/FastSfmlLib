@@ -12,21 +12,20 @@ namespace ktx {
         ~cInputText();
         static void readKey();
 
-        void setRect(sf::FloatRect l_Rect);
+        void setRectSize(sf::Vector2f l_RectSize);
         void setColorText(sf::Color l_ColorText);
         void setColorRect(sf::Color l_ColorRect);
+        void setFont(const sf::Font&);
+        void setString(std::string l_String);
 
-        sf::FloatRect getRect() const;
+        sf::Vector2f getRectSize() const;
         sf::Color getColorText() const;
         sf::Color getColorRect() const;
-        std::string getTextInput() const;
+        std::string getString() const;
 
     private:
-        sf::FloatRect m_flRect;
-        sf::Color m_clColorText;
-        sf::Color m_clColorRect;
+        sf::RectangleShape m_rsRect;
         sf::Text m_txText;
-        sf::Font m_ftFont;
     };
 }
 
