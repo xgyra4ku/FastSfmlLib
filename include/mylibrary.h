@@ -10,18 +10,25 @@ namespace ktx {
     public:
         cInputText();
         ~cInputText();
-        static void readKey();
+        void readKey();
+        void draw(sf::RenderWindow& window) const;
 
         void setRectSize(sf::Vector2f l_RectSize);
         void setColorText(sf::Color l_ColorText);
         void setColorRect(sf::Color l_ColorRect);
         void setFont(const sf::Font&);
-        void setString(std::string l_String);
+        void setString(const std::string& l_String);
+        void setPositionText(sf::Vector2f);
+        void setPositionRectangleShape(sf::Vector2f);
+        void setCharacterSize(unsigned int l_size);
 
         sf::Vector2f getRectSize() const;
         sf::Color getColorText() const;
         sf::Color getColorRect() const;
         std::string getString() const;
+        sf::Vector2f getPositionText() const;
+        sf::Vector2f getPositionRectangleShape() const;
+        unsigned int getCharacterSize() const;
 
     private:
         sf::RectangleShape m_rsRect;
