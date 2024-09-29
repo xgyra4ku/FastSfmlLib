@@ -1,0 +1,12 @@
+/SFML
+/Testing
+/CMakeFiles
+/cmake-build-debug
+/.cmake
+.ninja_deps
+.ninja_log
+.idea
+build.ninja
+CMakeCache.txt
+cmake_install.cmake
+libmylibrary.a
