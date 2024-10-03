@@ -6,8 +6,20 @@
 #include <string>
 
 namespace FS {
+    class Mouse {
+    public:
+        bool collision(float x, float y);
+        bool scroll();
+        bool scrollUp();
+        bool scrollDown();
+        bool buttonR();
+        bool buttonL();
+        bool move();
+
+        [[nodiscard]] sf::Vector2f getPosition() const;
+    };
+
     class Button {
-    private:
         sf::Text m_sfTxtTextButton;
     public:
         Button();
@@ -28,6 +40,25 @@ namespace FS {
         unsigned int getCharacterSize() const;
     };
     class Switch {
+        sf::RectangleShape staticRS;
+        sf::RectangleShape changeableRS;
+
+        bool statusSwitch;
+    public:
+        Switch();
+        ~Switch();
+
+        void setStatus();
+        void setSize(sf::Vector2f size);
+        void setColorStaticRS(sf::Color color);
+        void setColorChangeableRS(sf::Color color);
+        void setPosition(sf::Vector2f pos);
+
+        bool getStatus();
+        sf::Vector2f getSize();
+        sf::Vector2f getPos();
+        sf::Color getColorStaticRS();
+        sf::Color getColorChangeableRS();
 
     };
     class Slider {
