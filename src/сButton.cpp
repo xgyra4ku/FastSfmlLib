@@ -1,3 +1,6 @@
+///
+/// Button class
+///
 #include "../include/FastSfml.hpp"
 ///
 /// @brief Простравнство имен библиотеки

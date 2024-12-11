@@ -1,3 +1,6 @@
+///
+/// InputText class
+///
 #include "../include/FastSfml.hpp"
 namespace FS {
     InputText::InputText() {

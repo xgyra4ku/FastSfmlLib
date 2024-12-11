@@ -7,16 +7,15 @@
 
 namespace FS {
     class Mouse {
+        bool LButton;
+        bool RButton;
     public:
-        bool collision(float x, float y);
-        bool scroll();
-        bool scrollUp();
-        bool scrollDown();
+        Mouse();
+        ~Mouse();
+        void listen();
         bool buttonR();
         bool buttonL();
-        bool move();
-
-        [[nodiscard]] sf::Vector2f getPosition() const;
+        static bool collision(const sf::Vector2f &MousePosition, sf::Vector2f RectSize, sf::Vector2f RectPosition);
     };
 
     class Button {
@@ -40,15 +39,18 @@ namespace FS {
         unsigned int getCharacterSize() const;
     };
     class Switch {
-        sf::RectangleShape staticRS;
-        sf::RectangleShape changeableRS;
+        sf::RectangleShape staticRS; // стачиский который просто стои прямоугольник
+        sf::RectangleShape changeableRS; // изменяемый прямоугольник он немного меньше статического на пару процентов
 
-        bool statusSwitch;
+        bool status;
     public:
         Switch();
         ~Switch();
 
-        void setStatus();
+        void setStatus(bool status);
+
+        bool getStatus() const;
+
         void setSize(sf::Vector2f size);
         void setColorStaticRS(sf::Color color);
         void setColorChangeableRS(sf::Color color);
@@ -97,6 +99,29 @@ namespace FS {
         float m_fTime2{};
         bool m_bInput;
     };
+    class PhysicsObject {
+    public:
+        void setCollision(bool value);
+        void setCollisionLayer(int layer);
+        void setRect(sf::IntRect rect);
+        void setPosition(sf::Vector2f pos);
+        void setMass(float mass);
+        void setFriction(float friction);
+        void setGravity(float gravity);
+        [[nodiscard]] sf::IntRect getRect() const;
+        [[nodiscard]] sf::Vector2f getPosition() const;
+        [[nodiscard]] float getMass() const;
+        [[nodiscard]] float getFriction() const;
+        [[nodiscard]] float getGravity() const;
+        [[nodiscard]] int getCollisionLayer() const;
+        [[nodiscard]] bool getCollision() const;
+    };
+    class PhysicsWorld {
+    public:
+        void addPhysicsObjectVec(std::vector<PhysicsObject>& obj);
+        [[nodiscard]] std::vector<PhysicsObject>& getPhysicsObjectVec() const;
+    };
+
 }
 
 #endif

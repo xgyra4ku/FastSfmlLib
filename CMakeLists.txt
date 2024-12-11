@@ -12,7 +12,10 @@ add_library(FastSfml STATIC
         src/сButton.cpp
         include/FastSfml.hpp
         src/cSwitch.cpp
-        src/cSlider.cpp)
+        src/cSlider.cpp
+        src/cMouse.cpp
+        src/PhysicsObject.cpp
+        src/cPhysicsWorld.cpp)
 target_include_directories(FastSfml PUBLIC include)
 list(APPEND CMAKE_PREFIX_PATH "${SFML_DIR}/lib/cmake/SFML")
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
