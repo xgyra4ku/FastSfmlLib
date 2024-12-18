@@ -93,11 +93,14 @@ namespace FS {
         bool getInput() const;
 
     private:
+        float m_fTimeText;
+        float m_fTimeCursor;
         sf::RectangleShape m_sfRsRect;
         sf::Text m_sfTxtText;
         float m_fTime;
         float m_fTime2{};
         bool m_bInput;
+        void updateCursor();
     };
     class PhysicsObject {
     public:

@@ -132,4 +132,8 @@ namespace FS {
     unsigned int InputText::getCharacterSize() const {
         return m_sfTxtText.getCharacterSize();
     }
+
+    void InputText::updateCursor() {
+
+    }
 }
