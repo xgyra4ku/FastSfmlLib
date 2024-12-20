@@ -74,8 +74,6 @@ namespace fs::Text {
         float m_fSpeed;
 
         bool m_bInput;
-
-        char m_cLastSymbol;
     };
 }
 

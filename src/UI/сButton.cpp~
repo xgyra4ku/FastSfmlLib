@@ -97,7 +97,6 @@ namespace fs::UI {
     /// @brief установка толщины обводки
     ///
     void Button::setOutlineThickness(const float thickness) {
-        m_sfRsRectangleShape[0].setOutlineThickness(thickness);
         m_sfRsRectangleShape[1].setOutlineThickness(thickness);
         m_fOutlineThickness = thickness;
     }

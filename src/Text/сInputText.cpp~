@@ -73,18 +73,16 @@ namespace fs::Text {
 
             m_sfTxtText.setString(inputText);
         }
-        else {
-            std::string inputText = m_sfTxtText.getString();
-            if (!inputText.empty())
-                inputText.pop_back();
-            inputText += ' ';
-            m_sfTxtText.setString(inputText);
-        }
     }
     void InputText::setCursorSpeed(const float l_speed) {
         m_fSpeed = l_speed;
     }
     void InputText::setInput(const bool l_bool) {
+        std::string inputText = m_sfTxtText.getString();
+        if (!inputText.empty())
+            inputText.pop_back();
+        inputText += ' ';
+        m_sfTxtText.setString(inputText);
         m_bInput = l_bool;
     }
 

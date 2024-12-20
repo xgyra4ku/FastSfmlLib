@@ -29,7 +29,7 @@ namespace fs {
     /// @param RectPosition Позиция прямоугольника
     /// @return bool true если мышь в прямоугольнике
     ///
-    bool Mouse::collision(const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
+    bool Mouse::collision(const sf::Vector2f RectSize, const sf::Vector2f RectPosition) const {
         if (!window) {
             return false; // Проверка на nullptr
         }
@@ -51,7 +51,6 @@ namespace fs {
     /// @brief Левая кнопка мыши нажата
     ///
     bool Mouse::buttonL() {
-        std::cout << "buttonL" << std::endl;
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !LButton) {
             LButton = true;
             return true;
