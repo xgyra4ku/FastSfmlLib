@@ -51,6 +51,7 @@ namespace fs {
     /// @brief Левая кнопка мыши нажата
     ///
     bool Mouse::buttonL() {
+        std::cout << "buttonL" << std::endl;
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !LButton) {
             LButton = true;
             return true;
