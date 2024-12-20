@@ -1,7 +1,7 @@
-///
-/// Slider class
-///
-#include "../include/FastSfml.hpp"
-namespace FS {
-
-}
+// ///
+// /// Slider class
+// ///
+// #include "../include/FastSfml.hpp"
+// namespace FS {
+//
+// }

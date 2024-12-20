@@ -2,13 +2,12 @@
 /// InputText class
 ///
 #include "../include/FastSfml.hpp"
-namespace FS {
-    InputText::InputText() {
-        setColorRect(sf::Color(255, 255, 255));
-        setColorText(sf::Color(0, 0, 0));
+namespace fs::Text {
+    InputText::InputText() : m_fSpeed(4), m_bInput(false), m_fTime(0), m_fTime2(0) {
+        setColorRect({255, 255, 255});
+        setColorText({0, 0, 0});
+        setPosition({0,0});
         setString("");
-        m_fTime = 0;
-        m_bInput = false;
     }
 
     InputText::~InputText() = default;
@@ -35,29 +34,46 @@ namespace FS {
 
             m_fTime += 0.01f * l_fTime;
             m_fTime2 += 0.01f * l_fTime;
-            if (m_fTime > 2.0f) {
+            if (m_fTime > 1.0f) {
                 const bool shiftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
                                           sf::Keyboard::isKeyPressed(sf::Keyboard::RShift);
 
                 for (const auto& [key, character] : keyMap) {
                     if (sf::Keyboard::isKeyPressed(key)) {
+                        const char lastSymbol = inputText[inputText.size()-1];
+                        if (!inputText.empty())
+                            inputText.pop_back();
                         if (shiftPressed && std::isalpha(character)) {
                             inputText += std::toupper(character);
                         } else {
                             inputText += character;
                         }
+                        inputText += lastSymbol;
                         m_fTime = 0;
                         break;
                     }
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && !inputText.empty()) {
+                    const char lastSymbol = inputText[inputText.size()-1];
                     inputText.pop_back();
+                    inputText.pop_back();
+                    inputText += lastSymbol;
                     m_fTime = 0;
                 }
+            }
+            if (m_fTime2 > m_fSpeed) {
+                const char lastSymbol = inputText[inputText.size()-1];
+                if (!inputText.empty())
+                    inputText.pop_back();
+                inputText += lastSymbol == ' ' ? '|' : ' ';
+                m_fTime2 = 0;
             }
 
             m_sfTxtText.setString(inputText);
         }
+    }
+    void InputText::setCursorSpeed(const float l_speed) {
+        m_fSpeed = l_speed;
     }
     void InputText::setInput(const bool l_bool) {
         m_bInput = l_bool;
@@ -68,12 +84,9 @@ namespace FS {
         window.draw(m_sfTxtText);
     }
 
-    void InputText::setPositionText(const sf::Vector2f l_pos) {
+    void InputText::setPosition(const sf::Vector2f l_pos) {
         m_sfTxtText.setPosition(l_pos);
-    }
-
-    void InputText::setPositionRectangleShape(const sf::Vector2f l_pos) {
-        m_sfRsRect.setPosition(l_pos);
+        m_sfRsRect.setPosition(l_pos - sf::Vector2f{2.5f, 2.5f});
     }
 
     void InputText::setRectSize(const sf::Vector2f l_RectSize) {
@@ -105,6 +118,10 @@ namespace FS {
         return m_bInput;
     }
 
+   float InputText::getCursorSpeed() const {
+        return m_fSpeed;
+    }
+
     sf::Vector2f InputText::getRectSize() const {
         return m_sfRsRect.getSize();
     }
@@ -121,19 +138,11 @@ namespace FS {
         return m_sfTxtText.getString();
     }
 
-    sf::Vector2f InputText::getPositionText() const {
+    sf::Vector2f InputText::getPosition() const {
         return m_sfTxtText.getPosition();
-    }
-
-    sf::Vector2f InputText::getPositionRectangleShape() const {
-        return m_sfRsRect.getPosition();
     }
 
     unsigned int InputText::getCharacterSize() const {
         return m_sfTxtText.getCharacterSize();
-    }
-
-    void InputText::updateCursor() {
-
     }
 }

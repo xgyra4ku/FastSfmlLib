@@ -10,7 +10,7 @@
 ///
 /// namespace lib
 ///
-namespace FS {
+namespace fs {
     ///
     /// constructors
     ///
@@ -28,7 +28,8 @@ namespace FS {
     /// @param RectPosition Позиция прямоугольника
     /// @return bool true если мышь в прямоугольнике
     ///
-    bool Mouse::collision(const sf::Vector2f& MousePosition, const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
+    bool Mouse::collision(const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
+        const sf::Vector2f MousePosition = sf::Mouse::getPosition(window);
         if (static_cast<float>(MousePosition.x) >= RectPosition.x &&
             static_cast<float>(MousePosition.x) <= RectPosition.x + RectSize.x &&
             static_cast<float>(MousePosition.y) >= RectPosition.y &&
@@ -53,7 +54,7 @@ namespace FS {
     /// @brief Правая кнопка мыши нажата
     ///
     bool Mouse::buttonR() {
-        if constexpr (sf::Mouse::Button::Right && !RButton) {
+        if (sf::Mouse::Button::Right && !RButton) {
             RButton = true;
             return true;
         }
