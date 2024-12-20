@@ -9,13 +9,14 @@ namespace fs {
     class Mouse {
         bool LButton;
         bool RButton;
+        sf::RenderWindow* window;
     public:
-        Mouse();
+        explicit Mouse(sf::RenderWindow& sfRwWindow);
         ~Mouse();
-        void listen(sf::);
+        void listen();
         bool buttonR();
         bool buttonL();
-        bool collision(sf::Vector2f RectSize, sf::Vector2f RectPosition);
+        bool collision(sf::Vector2f RectSize, sf::Vector2f RectPosition) const;
     };
 
     // class Button {
@@ -122,7 +123,7 @@ namespace fs {
             InputText();
             ~InputText();
 
-            void readKey(float l_fTime);
+            void listen(float l_fTime);
 
             void draw(sf::RenderWindow& window) const;
 

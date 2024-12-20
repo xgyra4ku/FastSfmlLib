@@ -14,7 +14,8 @@ namespace fs {
     ///
     /// constructors
     ///
-    Mouse::Mouse() : LButton(sf::Mouse::Button::Left), RButton(sf::Mouse::Button::Right) {}
+    Mouse::Mouse(sf::RenderWindow& sfRwWindow) : LButton(false), RButton(false), window(&sfRwWindow) {
+    }
 
     ///
     /// destructor
@@ -23,21 +24,27 @@ namespace fs {
 
     ///
     /// @brief колизия мыши с прямоугольником
-    /// @param MousePosition Позиция мыши
     /// @param RectSize Размер прямоугольника
     /// @param RectPosition Позиция прямоугольника
     /// @return bool true если мышь в прямоугольнике
     ///
-    bool Mouse::collision(const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
-        const sf::Vector2f MousePosition = sf::Mouse::getPosition(window);
-        if (static_cast<float>(MousePosition.x) >= RectPosition.x &&
-            static_cast<float>(MousePosition.x) <= RectPosition.x + RectSize.x &&
-            static_cast<float>(MousePosition.y) >= RectPosition.y &&
-            static_cast<float>(MousePosition.y) <= RectPosition.y + RectSize.y) {
+    bool Mouse::collision(const sf::Vector2f RectSize, const sf::Vector2f RectPosition) const {
+        if (!window) {
+            return false; // Проверка на nullptr
+        }
+        // Получаем позицию мыши относительно окна
+        const sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+        // Проверяем, находится ли мышь внутри прямоугольника
+        if (const sf::Vector2f MousePosition(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+            MousePosition.x >= RectPosition.x &&
+            MousePosition.x <= RectPosition.x + RectSize.x &&
+            MousePosition.y >= RectPosition.y &&
+            MousePosition.y <= RectPosition.y + RectSize.y) {
             return true;
-            }
+        }
         return false;
     }
+
 
     ///
     /// @brief Левая кнопка мыши нажата

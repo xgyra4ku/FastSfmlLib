@@ -12,7 +12,7 @@ namespace fs::Text {
 
     InputText::~InputText() = default;
 
-    void InputText::readKey(const float l_fTime) {
+    void InputText::listen(const float l_fTime) {
         if (m_bInput) {
             std::string inputText = m_sfTxtText.getString();
 
@@ -55,8 +55,10 @@ namespace fs::Text {
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && !inputText.empty()) {
                     const char lastSymbol = inputText[inputText.size()-1];
-                    inputText.pop_back();
-                    inputText.pop_back();
+                    if (!inputText.empty())
+                        inputText.pop_back();
+                    if (!inputText.empty())
+                        inputText.pop_back();
                     inputText += lastSymbol;
                     m_fTime = 0;
                 }
