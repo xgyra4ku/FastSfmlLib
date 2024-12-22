@@ -9,7 +9,7 @@ namespace fs::UI {
     ///
     /// @brief Конструктор
     ///
-    Button::Button(sf::RenderWindow &pWindow) : m_pWindow(&pWindow), m_bStatus(false), m_buttonL(false) {
+    Switch::Switch(sf::RenderWindow &pWindow) : m_pWindow(&pWindow), m_bStatus(false), m_buttonL(false) {
         setPosition({300,300});
         setSize({100, 100});
         setFillColor(sf::Color::White);
@@ -23,12 +23,12 @@ namespace fs::UI {
     ///
     /// @brief Диструктор
     ///
-    Button::~Button() = default;
+    Switch::~Switch() = default;
 
     ///
     /// @brief Логика и обработка событий
     ///
-    void Button::logic() {
+    void Switch::logic() {
         if (buttonL()) {
             std::cout << "click" << std::endl;
             if (collision(m_pWindow, m_sfRsRectangleShape[0].getSize(), m_sfRsRectangleShape[0].getPosition())) {
@@ -40,7 +40,7 @@ namespace fs::UI {
     ///
     /// @brief Логика и обработка событий
     ///
-    void Button::draw() const {
+    void Switch::draw() const {
         m_pWindow->draw(m_sfRsRectangleShape[0]);
         if (m_bStatus) m_pWindow->draw(m_sfRsRectangleShape[1]);
     }
@@ -48,12 +48,12 @@ namespace fs::UI {
     ///
     /// @brief Получение статуса кнопки
     ///
-    bool Button::getStatus() const { return m_bStatus; }
+    bool Switch::getStatus() const { return m_bStatus; }
 
     ///
     /// @brief установка позиции кнопки
     ///
-    void Button::setPosition(const sf::Vector2f sfVecFValue) {
+    void Switch::setPosition(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape[0].setPosition(sfVecFValue);
         m_sfRsRectangleShape[1].setPosition(sfVecFValue);
         m_VecFPosition = sfVecFValue;
@@ -62,7 +62,7 @@ namespace fs::UI {
     ///
     /// @brief установка размера кнопки
     ///
-    void Button::setSize(const sf::Vector2f sfVecFValue) {
+    void Switch::setSize(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape[0].setSize(sfVecFValue);
         m_sfRsRectangleShape[1].setSize(sfVecFValue);
         m_VecFSize = sfVecFValue;
@@ -71,7 +71,7 @@ namespace fs::UI {
     ///
     /// @brief установка цвета нижнего прямоугольника
     ///
-    void Button::setFillColor(const sf::Color sfCrColorText) {
+    void Switch::setFillColor(const sf::Color sfCrColorText) {
         m_sfRsRectangleShape[0].setFillColor(sfCrColorText);
         m_sfRsRectangleShape[0].setOutlineColor(sfCrColorText);
         m_sfCrColor = sfCrColorText;
@@ -80,7 +80,7 @@ namespace fs::UI {
     ///
     /// @brief установка цвета верхнего прямоугольника
     ///
-    void Button::setHoverColor(const sf::Color sfCrColorHover) {
+    void Switch::setHoverColor(const sf::Color sfCrColorHover) {
         m_sfRsRectangleShape[1].setFillColor(sfCrColorHover);
         m_sfCrColorHover = sfCrColorHover;
     }
@@ -88,7 +88,7 @@ namespace fs::UI {
     ///
     /// @brief установка цвета обводки
     ///
-    void Button::setOutlineColor(const sf::Color color) {
+    void Switch::setOutlineColor(const sf::Color color) {
         m_sfRsRectangleShape[1].setOutlineColor(color);
         m_sfCrColorOutline = color;
     }
@@ -96,7 +96,7 @@ namespace fs::UI {
     ///
     /// @brief установка толщины обводки
     ///
-    void Button::setOutlineThickness(const float thickness) {
+    void Switch::setOutlineThickness(const float thickness) {
         m_sfRsRectangleShape[0].setOutlineThickness(thickness);
         m_sfRsRectangleShape[1].setOutlineThickness(thickness);
         m_fOutlineThickness = thickness;

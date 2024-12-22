@@ -9,7 +9,7 @@ link_directories("${SFML_DIR}/lib")
 
 add_library(FastSfml STATIC
         src/Text/сInputText.cpp
-        src/UI/сSwitch.cpp
+        src/UI/сButton.cpp
         include/FastSfml.hpp
         src/UI/cSw.cpp
         src/UI/cSlider.cpp
