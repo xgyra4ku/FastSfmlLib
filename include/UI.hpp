@@ -68,6 +68,7 @@ namespace fs::UI {
         void logic();
         bool getStatus() const;
         void draw() const;
+
         void setPosition(sf::Vector2f sfVecFValue) override;
         void setSize(sf::Vector2f sfVecFValue) override;
         void setFillColor(sf::Color sfCrColorText) override;
@@ -81,7 +82,28 @@ namespace fs::UI {
         bool m_buttonL;
     };
 
+    ///
+    /// Slider class
+    ///
+    class Slider final : public InterfaceUI {
+    public:
+        explicit Slider(sf::RenderWindow &pWindow);
 
+        ~Slider() override;
+
+        void logic();
+        void draw() const;
+        int getStatus() const;
+
+        void setPosition(sf::Vector2f sfVecFValue) override;
+        void setSize(sf::Vector2f sfVecFValue) override;
+        void setFillColor(sf::Color sfCrColorText) override;
+        void setHoverColor(sf::Color sfCrColorHover) override;
+    private:
+        sf::RenderWindow *m_pWindow;
+        sf::RectangleShape m_sfRsRectangleShape[2];
+        int m_iStatus;
+    };
     // class Switch {
     //     sf::RectangleShape staticRS; // стачиский который просто стои прямоугольник
     //     sf::RectangleShape changeableRS; // изменяемый прямоугольник он немного меньше статического на пару процентов

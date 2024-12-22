@@ -58,7 +58,7 @@ public:
 ///
 namespace fs::UI {
     ///
-    /// Button class
+    /// Switch class
     ///
     class Switch final : protected InterfaceUI {
     public:
