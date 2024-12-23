@@ -46,27 +46,31 @@ namespace fs::UI {
     /// @brief установка позиции кнопки
     ///
     void Slider::setPosition(const sf::Vector2f sfVecFValue) {
-
+        //m_sfRsRectangleShape[0].setPosition(sfVecFValue);
+        //m_sfRsRectangleShape[1].setPosition(sfVecFValue);
+        m_VecFPosition = sfVecFValue;
     }
 
     ///
     /// @brief установка размера кнопки
     ///
     void Slider::setSize(const sf::Vector2f sfVecFValue) {
-
+        // логика установки размера
     }
 
     ///
     /// @brief установка цвета нижнего прямоугольника
     ///
     void Slider::setFillColor(const sf::Color sfCrColorText) {
-
+        m_sfRsRectangleShape[0].setFillColor(sfCrColorText);
+        m_sfCrColor = sfCrColorText;
     }
 
     ///
     /// @brief установка цвета верхнего прямоугольника
     ///
     void Slider::setHoverColor(const sf::Color sfCrColorHover) {
-
+        m_sfRsRectangleShape[1].setFillColor(sfCrColorHover);
+        m_sfCrColorHover = sfCrColorHover;
     }
 }
