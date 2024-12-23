@@ -11,7 +11,7 @@ add_library(FastSfml STATIC
         src/Text/сInputText.cpp
         src/UI/сSwitch.cpp
         include/FastSfml.hpp
-        src/UI/cSw.cpp
+        src/UI/cButton.cpp
         src/UI/cSlider.cpp
         src/cMouse.cpp
         src/PhysicsWorld/PhysicsObject.cpp

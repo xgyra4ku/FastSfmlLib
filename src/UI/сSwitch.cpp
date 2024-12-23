@@ -1,5 +1,5 @@
 ///
-/// Button class
+/// Switch class
 ///
 #include "../include/FastSfml.hpp"
 ///

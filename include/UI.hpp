@@ -104,35 +104,31 @@ namespace fs::UI {
         sf::RectangleShape m_sfRsRectangleShape[2];
         int m_iStatus;
     };
-    // class Switch {
-    //     sf::RectangleShape staticRS; // стачиский который просто стои прямоугольник
-    //     sf::RectangleShape changeableRS; // изменяемый прямоугольник он немного меньше статического на пару процентов
-    //
-    //     bool status;
-    // public:
-    //     Switch();
-    //     ~Switch();
-    //
-    //     void setStatus(bool status);
-    //
-    //     bool getStatus() const;
-    //
-    //     void setSize(sf::Vector2f size);
-    //     void setColorStaticRS(sf::Color color);
-    //     void setColorChangeableRS(sf::Color color);
-    //     void setPosition(sf::Vector2f pos);
-    //
-    //     bool getStatus();
-    //     sf::Vector2f getSize();
-    //     sf::Vector2f getPos();
-    //     sf::Color getColorStaticRS();
-    //     sf::Color getColorChangeableRS();
-    //
-    // };
-    // class Slider {
-    //
-    // };
 
+    ///
+    /// Button class
+    ///
+    class Button final : protected InterfaceUI {
+    public:
+        explicit Button(sf::RenderWindow &pWindow);
+
+        ~Button() override;
+        void logic();
+        bool getStatus() const;
+        void draw() const;
+
+        void setPosition(sf::Vector2f sfVecFValue) override;
+        void setSize(sf::Vector2f sfVecFValue) override;
+        void setFillColor(sf::Color sfCrColorText) override;
+        void setHoverColor(sf::Color sfCrColorHover) override;
+        void setOutlineColor(sf::Color color) override;
+        void setOutlineThickness(float thickness) override;
+    private:
+        sf::RenderWindow *m_pWindow;
+        sf::RectangleShape m_sfRsRectangleShape;
+        bool m_bStatus;
+        bool m_buttonL;
+    };
 }
 
 #endif //FASTSFML_UI_HPP
