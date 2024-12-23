@@ -6,7 +6,7 @@ namespace fs::UI {
     ///
     /// @brief Конструктор
     ///
-    Slider::Slider(sf::RenderWindow &pWindow) : m_pWindow(&pWindow), m_iStatus(1) {
+    Slider::Slider(sf::RenderWindow &pWindow) : m_pWindow(&pWindow), m_iStatus(1), m_iOption(1) {
         //setPosition({300,300});
         //setSize({100, 100});
         //setFillColor(sf::Color::White);
@@ -40,14 +40,24 @@ namespace fs::UI {
     ///
     /// @brief Получение статуса кнопки
     ///
-    int Slider::getStatus() const { return m_iStatus; }
+    int Slider::getStatus() const {
+        return m_iStatus;
+    }
+
+    ///
+    /// @brief установка статуса кнопки
+    ///
+    void Slider::setStatus(const int iStatus) {
+        // логика обработки перемешения слайдера
+        m_iStatus = iStatus;
+    }
 
     ///
     /// @brief установка позиции кнопки
     ///
     void Slider::setPosition(const sf::Vector2f sfVecFValue) {
-        //m_sfRsRectangleShape[0].setPosition(sfVecFValue);
-        //m_sfRsRectangleShape[1].setPosition(sfVecFValue);
+        m_sfRsRectangleShape[0].setPosition(sf::Vector2f(sfVecFValue.x, sfVecFValue.y * 0.333f));
+        m_sfRsRectangleShape[1].setPosition(sf::Vector2f(sfVecFValue.x, sfVecFValue.y));
         m_VecFPosition = sfVecFValue;
     }
 
@@ -55,7 +65,9 @@ namespace fs::UI {
     /// @brief установка размера кнопки
     ///
     void Slider::setSize(const sf::Vector2f sfVecFValue) {
-        // логика установки размера
+        m_sfRsRectangleShape[0].setSize(sf::Vector2f(sfVecFValue.x, sfVecFValue.y * 0.333f));
+        m_sfRsRectangleShape[1].setSize(sf::Vector2f(sfVecFValue.x * 0.333f, sfVecFValue.y));
+        m_VecFSize = sfVecFValue;
     }
 
     ///
@@ -72,5 +84,19 @@ namespace fs::UI {
     void Slider::setHoverColor(const sf::Color sfCrColorHover) {
         m_sfRsRectangleShape[1].setFillColor(sfCrColorHover);
         m_sfCrColorHover = sfCrColorHover;
+    }
+
+    ///
+    /// @brief установка количество опций
+    ///
+    void Slider::setOption(const int iOption) {
+        m_iOption = iOption;
+    }
+
+    ///
+    /// @brief получение количество опций
+    ///
+    int Slider::getOption() const {
+        return m_iOption;
     }
 }
