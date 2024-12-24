@@ -2,7 +2,10 @@
 /// InterfaseUI class
 ///
 #include "../include/UI.hpp"
-InterfaceUI::InterfaceUI() = default;
+InterfaceUI::InterfaceUI() :
+LButton{}, RButton {}, m_TIME{}, m_fOutlineThickness{},
+m_sfTxtText{}, m_pFont{}, m_VecFPosition{},
+m_VecFSize{}, m_sfCrColor{}, m_sfCrColorHover{}, m_sfCrColorOutline{} {}
 InterfaceUI::~InterfaceUI() = default;
 
 

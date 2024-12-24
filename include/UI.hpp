@@ -5,16 +5,16 @@
 #include <string>
 
 ///
-/// InterfaseUI class
+/// InterfaceUI class
 ///
 class InterfaceUI {
-    bool LButton{};
-    bool RButton{};
+    bool LButton;
+    bool RButton;
 protected:
     float m_TIME = 0;
     float m_fOutlineThickness = 0;
     sf::Text m_sfTxtText;
-    sf::Font m_pFont{};
+    sf::Font m_pFont;
     sf::Vector2f m_VecFPosition;
     sf::Vector2f m_VecFSize;
     sf::Color m_sfCrColor;
@@ -54,7 +54,7 @@ public:
     virtual sf::Color getOutlineColor() const;
 };
 ///
-/// namespace UI
+/// Namespace UI
 ///
 namespace fs::UI {
     ///

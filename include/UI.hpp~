@@ -5,16 +5,16 @@
 #include <string>
 
 ///
-/// InterfaseUI class
+/// InterfaceUI class
 ///
 class InterfaceUI {
-    bool LButton{};
-    bool RButton{};
+    bool LButton;
+    bool RButton;
 protected:
     float m_TIME = 0;
     float m_fOutlineThickness = 0;
     sf::Text m_sfTxtText;
-    sf::Font m_pFont{};
+    sf::Font m_pFont;
     sf::Vector2f m_VecFPosition;
     sf::Vector2f m_VecFSize;
     sf::Color m_sfCrColor;
@@ -94,6 +94,7 @@ namespace fs::UI {
         void logic();
         void draw() const;
         int getStatus() const;
+        void setStatus(int iStatus);
 
         void setPosition(sf::Vector2f sfVecFValue) override;
         void setSize(sf::Vector2f sfVecFValue) override;
@@ -105,7 +106,7 @@ namespace fs::UI {
     private:
         sf::RenderWindow *m_pWindow;
         sf::RectangleShape m_sfRsRectangleShape[2];
-        int m_iStatus, m_iOption;
+        int m_iStatus, m_iOption{};
     };
 
     ///
