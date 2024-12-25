@@ -44,7 +44,7 @@ namespace fs::Text {
                         if (!inputText.empty())
                             inputText.pop_back();
                         if (shiftPressed && std::isalpha(character)) {
-                            inputText += std::toupper(character);
+                            inputText += static_cast<char>(std::toupper(static_cast<unsigned char>(character)));
                         } else {
                             inputText += character;
                         }
