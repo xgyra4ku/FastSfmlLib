@@ -3,11 +3,27 @@
 ///
 #include "../include/FastSfml.hpp"
 namespace fs::Text {
-    InputText::InputText() : m_fTime(0), m_fTime2(0), m_fSpeed(4), m_bInput(false) {
+    InputText::InputText() : m_fTime(0), m_fTime2(0), m_fSpeed(4), m_bInput(false), m_cLastSymbol{} {
         setColorRect({255, 255, 255});
         setColorText({0, 0, 0});
         setPosition({0,0});
         setString("");
+        std::map<sf::Keyboard::Key, char> keyMapLocal = {
+            {sf::Keyboard::A, 'a'}, {sf::Keyboard::B, 'b'}, {sf::Keyboard::C, 'c'},
+            {sf::Keyboard::D, 'd'}, {sf::Keyboard::E, 'e'}, {sf::Keyboard::F, 'f'},
+            {sf::Keyboard::G, 'g'}, {sf::Keyboard::H, 'h'}, {sf::Keyboard::I, 'i'},
+            {sf::Keyboard::J, 'j'}, {sf::Keyboard::K, 'k'}, {sf::Keyboard::L, 'l'},
+            {sf::Keyboard::M, 'm'}, {sf::Keyboard::N, 'n'}, {sf::Keyboard::O, 'o'},
+            {sf::Keyboard::P, 'p'}, {sf::Keyboard::Q, 'q'}, {sf::Keyboard::R, 'r'},
+            {sf::Keyboard::S, 's'}, {sf::Keyboard::T, 't'}, {sf::Keyboard::U, 'u'},
+            {sf::Keyboard::V, 'v'}, {sf::Keyboard::W, 'w'}, {sf::Keyboard::X, 'x'},
+            {sf::Keyboard::Y, 'y'}, {sf::Keyboard::Z, 'z'}, {sf::Keyboard::Space, ' '},
+            {sf::Keyboard::Num0, '0'}, {sf::Keyboard::Num1, '1'}, {sf::Keyboard::Num2, '2'},
+            {sf::Keyboard::Num3, '3'}, {sf::Keyboard::Num4, '4'}, {sf::Keyboard::Num5, '5'},
+            {sf::Keyboard::Num6, '6'}, {sf::Keyboard::Num7, '7'}, {sf::Keyboard::Num8, '8'},
+            {sf::Keyboard::Num9, '9'},
+        };
+        keyMap = keyMapLocal;
     }
 
     InputText::~InputText() = default;
@@ -15,22 +31,6 @@ namespace fs::Text {
     void InputText::listen(const float l_fTime) {
         if (m_bInput) {
             std::string inputText = m_sfTxtText.getString();
-
-            std::map<sf::Keyboard::Key, char> keyMap = {
-                {sf::Keyboard::A, 'a'}, {sf::Keyboard::B, 'b'}, {sf::Keyboard::C, 'c'},
-                {sf::Keyboard::D, 'd'}, {sf::Keyboard::E, 'e'}, {sf::Keyboard::F, 'f'},
-                {sf::Keyboard::G, 'g'}, {sf::Keyboard::H, 'h'}, {sf::Keyboard::I, 'i'},
-                {sf::Keyboard::J, 'j'}, {sf::Keyboard::K, 'k'}, {sf::Keyboard::L, 'l'},
-                {sf::Keyboard::M, 'm'}, {sf::Keyboard::N, 'n'}, {sf::Keyboard::O, 'o'},
-                {sf::Keyboard::P, 'p'}, {sf::Keyboard::Q, 'q'}, {sf::Keyboard::R, 'r'},
-                {sf::Keyboard::S, 's'}, {sf::Keyboard::T, 't'}, {sf::Keyboard::U, 'u'},
-                {sf::Keyboard::V, 'v'}, {sf::Keyboard::W, 'w'}, {sf::Keyboard::X, 'x'},
-                {sf::Keyboard::Y, 'y'}, {sf::Keyboard::Z, 'z'}, {sf::Keyboard::Space, ' '},
-                {sf::Keyboard::Num0, '0'}, {sf::Keyboard::Num1, '1'}, {sf::Keyboard::Num2, '2'},
-                {sf::Keyboard::Num3, '3'}, {sf::Keyboard::Num4, '4'}, {sf::Keyboard::Num5, '5'},
-                {sf::Keyboard::Num6, '6'}, {sf::Keyboard::Num7, '7'}, {sf::Keyboard::Num8, '8'},
-                {sf::Keyboard::Num9, '9'},
-            };
 
             m_fTime += 0.01f * l_fTime;
             m_fTime2 += 0.01f * l_fTime;

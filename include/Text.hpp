@@ -65,6 +65,7 @@ namespace fs::Text {
         float getCursorSpeed() const;
 
     private:
+        std::map<sf::Keyboard::Key, char> keyMap;
         sf::RectangleShape m_sfRsRect;
 
         sf::Text m_sfTxtText;

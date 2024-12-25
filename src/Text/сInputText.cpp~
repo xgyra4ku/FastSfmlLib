@@ -3,86 +3,102 @@
 ///
 #include "../include/FastSfml.hpp"
 namespace fs::Text {
-    InputText::InputText() : m_fTime(0), m_fTime2(0), m_fSpeed(4), m_bInput(false) {
+    InputText::InputText() : m_fTime(0), m_fTime2(0), m_fSpeed(4), m_bInput(false), m_cLastSymbol{} {
         setColorRect({255, 255, 255});
         setColorText({0, 0, 0});
         setPosition({0,0});
         setString("");
+        std::map<sf::Keyboard::Key, char> keyMapLocal = {
+            {sf::Keyboard::A, 'a'}, {sf::Keyboard::B, 'b'}, {sf::Keyboard::C, 'c'},
+            {sf::Keyboard::D, 'd'}, {sf::Keyboard::E, 'e'}, {sf::Keyboard::F, 'f'},
+            {sf::Keyboard::G, 'g'}, {sf::Keyboard::H, 'h'}, {sf::Keyboard::I, 'i'},
+            {sf::Keyboard::J, 'j'}, {sf::Keyboard::K, 'k'}, {sf::Keyboard::L, 'l'},
+            {sf::Keyboard::M, 'm'}, {sf::Keyboard::N, 'n'}, {sf::Keyboard::O, 'o'},
+            {sf::Keyboard::P, 'p'}, {sf::Keyboard::Q, 'q'}, {sf::Keyboard::R, 'r'},
+            {sf::Keyboard::S, 's'}, {sf::Keyboard::T, 't'}, {sf::Keyboard::U, 'u'},
+            {sf::Keyboard::V, 'v'}, {sf::Keyboard::W, 'w'}, {sf::Keyboard::X, 'x'},
+            {sf::Keyboard::Y, 'y'}, {sf::Keyboard::Z, 'z'}, {sf::Keyboard::Space, ' '},
+            {sf::Keyboard::Num0, '0'}, {sf::Keyboard::Num1, '1'}, {sf::Keyboard::Num2, '2'},
+            {sf::Keyboard::Num3, '3'}, {sf::Keyboard::Num4, '4'}, {sf::Keyboard::Num5, '5'},
+            {sf::Keyboard::Num6, '6'}, {sf::Keyboard::Num7, '7'}, {sf::Keyboard::Num8, '8'},
+            {sf::Keyboard::Num9, '9'},
+        };
+        keyMap = keyMapLocal;
     }
 
     InputText::~InputText() = default;
 
     void InputText::listen(const float l_fTime) {
-        if (m_bInput) {
-            std::string inputText = m_sfTxtText.getString();
+    if (m_bInput) {
+        std::string inputText = m_sfTxtText.getString();
 
-            std::map<sf::Keyboard::Key, char> keyMap = {
-                {sf::Keyboard::A, 'a'}, {sf::Keyboard::B, 'b'}, {sf::Keyboard::C, 'c'},
-                {sf::Keyboard::D, 'd'}, {sf::Keyboard::E, 'e'}, {sf::Keyboard::F, 'f'},
-                {sf::Keyboard::G, 'g'}, {sf::Keyboard::H, 'h'}, {sf::Keyboard::I, 'i'},
-                {sf::Keyboard::J, 'j'}, {sf::Keyboard::K, 'k'}, {sf::Keyboard::L, 'l'},
-                {sf::Keyboard::M, 'm'}, {sf::Keyboard::N, 'n'}, {sf::Keyboard::O, 'o'},
-                {sf::Keyboard::P, 'p'}, {sf::Keyboard::Q, 'q'}, {sf::Keyboard::R, 'r'},
-                {sf::Keyboard::S, 's'}, {sf::Keyboard::T, 't'}, {sf::Keyboard::U, 'u'},
-                {sf::Keyboard::V, 'v'}, {sf::Keyboard::W, 'w'}, {sf::Keyboard::X, 'x'},
-                {sf::Keyboard::Y, 'y'}, {sf::Keyboard::Z, 'z'}, {sf::Keyboard::Space, ' '},
-                {sf::Keyboard::Num0, '0'}, {sf::Keyboard::Num1, '1'}, {sf::Keyboard::Num2, '2'},
-                {sf::Keyboard::Num3, '3'}, {sf::Keyboard::Num4, '4'}, {sf::Keyboard::Num5, '5'},
-                {sf::Keyboard::Num6, '6'}, {sf::Keyboard::Num7, '7'}, {sf::Keyboard::Num8, '8'},
-                {sf::Keyboard::Num9, '9'},
-            };
+        // Обновляем время
+        m_fTime += 0.01f * l_fTime;
+        m_fTime2 += 0.01f * l_fTime;
 
-            m_fTime += 0.01f * l_fTime;
-            m_fTime2 += 0.01f * l_fTime;
-            if (m_fTime > 1.0f) {
-                const bool shiftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
-                                          sf::Keyboard::isKeyPressed(sf::Keyboard::RShift);
+        // Проверяем, если прошло достаточно времени для ввода нового символа
+        if (m_fTime > 0.1f) {
+            const bool shiftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+                                      sf::Keyboard::isKeyPressed(sf::Keyboard::RShift);
 
-                for (const auto& [key, character] : keyMap) {
-                    if (sf::Keyboard::isKeyPressed(key)) {
-                        const char lastSymbol = inputText[inputText.size()-1];
-                        if (!inputText.empty())
-                            inputText.pop_back();
-                        if (shiftPressed && std::isalpha(character)) {
-                            inputText += std::toupper(character);
-                        } else {
-                            inputText += character;
-                        }
-                        inputText += lastSymbol;
-                        m_fTime = 0;
-                        break;
+            // Перебираем все клавиши
+            for (const auto& [key, character] : keyMap) {
+                if (sf::Keyboard::isKeyPressed(key)) {
+                    const char lastSymbol = inputText.empty() ? '\0' : inputText[inputText.size() - 1];
+                    if (!inputText.empty())
+                        inputText.pop_back();  // Убираем последний символ, если он есть
+
+                    // Добавляем символ с учетом регистра
+                    if (shiftPressed && std::isalpha(character)) {
+                        inputText += std::toupper(character);
+                    } else {
+                        inputText += character;
                     }
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && !inputText.empty()) {
-                    const char lastSymbol = inputText[inputText.size()-1];
-                    if (!inputText.empty())
-                        inputText.pop_back();
-                    if (!inputText.empty())
-                        inputText.pop_back();
-                    inputText += lastSymbol;
+                    inputText += lastSymbol;  // Добавляем последний символ снова
+
+                    // Сброс времени, чтобы начать отсчет для следующего символа
                     m_fTime = 0;
+                    break;
                 }
             }
-            if (m_fTime2 > m_fSpeed) {
-                const char lastSymbol = inputText[inputText.size()-1];
+
+            // Если нажата клавиша BackSpace, удаляем символы
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && !inputText.empty()) {
+                const char lastSymbol = inputText[inputText.size() - 1];
                 if (!inputText.empty())
                     inputText.pop_back();
-                inputText += lastSymbol == ' ' ? '|' : ' ';
-                m_fTime2 = 0;
+                if (!inputText.empty())
+                    inputText.pop_back();
+                inputText += lastSymbol;
+                m_fTime = 0;
             }
-
-            m_sfTxtText.setString(inputText);
         }
+
+        // Меняем пробел на вертикальную черту через некоторое время
+        if (m_fTime2 > m_fSpeed) {
+            const char lastSymbol = inputText[inputText.size() - 1];
+            if (!inputText.empty())
+                inputText.pop_back();
+            inputText += lastSymbol == ' ' ? '|' : ' ';
+            m_fTime2 = 0;
+        }
+
+        // Обновляем отображаемый текст
+        m_sfTxtText.setString(inputText);
     }
-    void InputText::setCursorSpeed(const float l_speed) {
-        m_fSpeed = l_speed;
-    }
-    void InputText::setInput(const bool l_bool) {
+    else {
         std::string inputText = m_sfTxtText.getString();
         if (!inputText.empty())
             inputText.pop_back();
         inputText += ' ';
         m_sfTxtText.setString(inputText);
+    }
+}
+
+    void InputText::setCursorSpeed(const float l_speed) {
+        m_fSpeed = l_speed;
+    }
+    void InputText::setInput(const bool l_bool) {
         m_bInput = l_bool;
     }
 
