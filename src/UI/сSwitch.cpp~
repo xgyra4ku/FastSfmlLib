@@ -53,10 +53,21 @@ namespace fs::UI {
     /// @brief установка позиции кнопки
     ///
     void Switch::setPosition(const sf::Vector2f sfVecFValue) {
+        // Устанавливаем позицию для первого (горизонтального) прямоугольника
         m_sfRsRectangleShape[0].setPosition(sfVecFValue);
-        m_sfRsRectangleShape[1].setPosition(sfVecFValue);
+
+        // Устанавливаем позицию для второго (вертикального) прямоугольника относительно первого
+        // Например, вертикальный прямоугольник может быть на середине горизонтального
+        sf::Vector2f verticalPosition = sfVecFValue;
+        verticalPosition.x += (m_sfRsRectangleShape[0].getSize().x / 2) - (m_sfRsRectangleShape[1].getSize().x / 2);
+        verticalPosition.y += (m_sfRsRectangleShape[0].getSize().y / 2) - (m_sfRsRectangleShape[1].getSize().y / 2);
+
+        m_sfRsRectangleShape[1].setPosition(verticalPosition);
+
+        // Запоминаем общую позицию
         m_VecFPosition = sfVecFValue;
     }
+
 
     ///
     /// @brief установка размера кнопки

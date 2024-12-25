@@ -73,7 +73,7 @@ namespace fs::UI {
 
         // Устанавливаем размер для вертикального прямоугольника
         // Вертикальный прямоугольник будет занимать всю высоту, но определенную ширину
-        m_sfRsRectangleShape[1].setSize(sf::Vector2f(((sfVecFValue.x / 15.0f < sfVecFValue.y / 2.5f) ? sfVecFValue.x / 15 : sfVecFValue.y / 1.5f), sfVecFValue.y)); // Например, вертикальный прямоугольник будет тонким, но высоким
+        m_sfRsRectangleShape[1].setSize(sf::Vector2f(((sfVecFValue.x / 15.0f < sfVecFValue.y / 2.5f) ? sfVecFValue.x / 15 : sfVecFValue.y / 3.5f), sfVecFValue.y)); // Например, вертикальный прямоугольник будет тонким, но высоким
     }
 
 
