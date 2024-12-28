@@ -6,7 +6,9 @@ namespace fs::UI {
     ///
     /// @brief Конструктор
     ///
-    Slider::Slider(sf::RenderWindow &pWindow) : m_pWindow(&pWindow), m_iStatus(1), m_iOption(1) {
+    Slider::Slider(sf::RenderWindow &pWindow) :
+    m_pWindow(&pWindow),m_iStatus(0),m_iOption(1),
+    m_fLastPositionMouse(getMousePosition(m_pWindow).x) , m_bButtonPressed(false), m_bInput(false) {
         setPosition({0,0});
         setSize({100, 100});
         setFillColor(sf::Color::White);
@@ -22,7 +24,38 @@ namespace fs::UI {
     /// @brief Логика и обработка событий
     ///
     void Slider::logic() {
-
+        //сть встроеные функции buttonClampingL() и buttonPressAndReleaseL()
+        if (buttonPressAndReleaseL()) {
+            if (collision(m_pWindow, m_sfRsRectangleShape[1].getSize(), m_sfRsRectangleShape[1].getPosition())) m_bInput = true;
+            else m_bInput= false;
+        }
+        if (buttonClampingL()) {
+            if (collision(m_pWindow, m_sfRsRectangleShape[1].getSize(), m_sfRsRectangleShape[1].getPosition()))
+                m_bButtonPressed = true;
+        } else {
+            m_fLastPositionMouse = getMousePosition(m_pWindow).x;
+            m_bButtonPressed = false;
+        }
+        if (m_bButtonPressed && m_bInput) {
+            const float stepWidth = getSize().x / static_cast<float>(m_iOption);
+            float currentMousePositionX = getMousePosition(m_pWindow).x;
+            if (m_fLastPositionMouse - stepWidth > currentMousePositionX &&m_iStatus > 0) {
+                m_iStatus--;
+                m_sfRsRectangleShape[1].setPosition(
+                    m_sfRsRectangleShape[1].getPosition().x - stepWidth,
+                    m_sfRsRectangleShape[1].getPosition().y
+                );
+                m_fLastPositionMouse -= stepWidth;
+            }
+            else if (m_fLastPositionMouse + stepWidth < currentMousePositionX &&m_iStatus < m_iOption) {
+                m_iStatus++;
+                m_sfRsRectangleShape[1].setPosition(
+                    m_sfRsRectangleShape[1].getPosition().x + stepWidth,
+                    m_sfRsRectangleShape[1].getPosition().y
+                );
+                m_fLastPositionMouse += stepWidth;
+            }
+        }
     }
 
     ///
@@ -48,6 +81,8 @@ namespace fs::UI {
         m_iStatus = iStatus;
     }
 
+
+
     ///
     /// @brief установка позиции кнопки
     ///
@@ -66,14 +101,14 @@ namespace fs::UI {
     void Slider::setSize(const sf::Vector2f sfVecFValue) {
         // Запоминаем общий размер
         m_VecFSize = sfVecFValue;
+        m_sfRsRectangleShape[0].setSize(sf::Vector2f(sfVecFValue.x, sfVecFValue.y / 5));
+        float xx = (sfVecFValue.x > sfVecFValue.y) ? 3.f : 1.5f;
 
-        // Устанавливаем размер для горизонтального прямоугольника
-        // Горизонтальный прямоугольник будет занимать всю ширину, но только определенную высоту
-        m_sfRsRectangleShape[0].setSize(sf::Vector2f(sfVecFValue.x, sfVecFValue.y / 5)); // Например, горизонтальный прямоугольник будет очень тонким
+        m_sfRsRectangleShape[1].setSize(sf::Vector2f(
+            (sfVecFValue.x / 15.0f < sfVecFValue.y / xx) ? sfVecFValue.x / 15.0f : sfVecFValue.y / xx,
+            sfVecFValue.y
+        ));
 
-        // Устанавливаем размер для вертикального прямоугольника
-        // Вертикальный прямоугольник будет занимать всю высоту, но определенную ширину
-        m_sfRsRectangleShape[1].setSize(sf::Vector2f(((sfVecFValue.x / 15.0f < sfVecFValue.y / 2.5f) ? sfVecFValue.x / 15 : sfVecFValue.y / 1.5f), sfVecFValue.y)); // Например, вертикальный прямоугольник будет тонким, но высоким
     }
 
 

@@ -25,8 +25,15 @@ protected:
     virtual ~InterfaceUI();
 
     static bool collision(const sf::RenderWindow* window, sf::Vector2f RectSize, sf::Vector2f RectPosition);
-    bool buttonR();
-    bool buttonL();
+
+    bool buttonPressAndReleaseL();
+
+    bool buttonPressAndReleaseR();
+
+    static sf::Vector2f getMousePosition(const sf::RenderWindow* window);
+
+    static bool buttonClampingR();
+    static bool buttonClampingL();
 public:
     // Чисто функции интерфейса
     virtual void setFillColor(sf::Color sfCrColorText);
@@ -106,7 +113,9 @@ namespace fs::UI {
     private:
         sf::RenderWindow *m_pWindow;
         sf::RectangleShape m_sfRsRectangleShape[2];
-        int m_iStatus, m_iOption{};
+        int m_iStatus, m_iOption;
+        float m_fLastPositionMouse;
+        bool m_bButtonPressed, m_bInput;
     };
 
     ///

@@ -94,7 +94,7 @@ bool InterfaceUI::collision(const sf::RenderWindow* window, const sf::Vector2f R
 ///
 /// @brief Левая кнопка мыши нажата
 ///
-bool InterfaceUI::buttonL() {
+bool InterfaceUI::buttonPressAndReleaseL() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         if (!LButton) {
             LButton = true; // Устанавливаем флаг
@@ -109,7 +109,7 @@ bool InterfaceUI::buttonL() {
 ///
 /// @brief Правая кнопка мыши нажата
 ///
-bool InterfaceUI::buttonR() {
+bool InterfaceUI::buttonPressAndReleaseR() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
         if (!RButton) {
             RButton = true; // Устанавливаем флаг
@@ -119,5 +119,25 @@ bool InterfaceUI::buttonR() {
         RButton = false; // Сбрасываем флаг, если кнопка отпущена
     }
     return false;
+}
+
+///
+/// @brief Получение зажатия правой кнопки мыши
+///
+bool InterfaceUI::buttonClampingL() {
+    return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+}
+///
+/// @brief Получение зажатия левой кнопки мыши
+///
+bool InterfaceUI::buttonClampingR() {
+    return sf::Mouse::isButtonPressed(sf::Mouse::Right);
+}
+
+///
+/// @brief Получение позиции мыши
+///
+sf::Vector2f InterfaceUI::getMousePosition(const sf::RenderWindow* window) {
+    return sf::Vector2f(sf::Mouse::getPosition(*window));
 }
 
