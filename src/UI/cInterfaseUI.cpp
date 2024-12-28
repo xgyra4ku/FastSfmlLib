@@ -3,78 +3,78 @@
 ///
 #include "../include/UI.hpp"
 InterfaceUI::InterfaceUI() :
-LButton{}, RButton {}, m_TIME{}, m_fOutlineThickness{},
-m_sfTxtText{}, m_pFont{}, m_VecFPosition{},
-m_VecFSize{}, m_sfCrColor{}, m_sfCrColorHover{}, m_sfCrColorOutline{} {}
+m_bLButton{}, m_bRButton {}, im_TIME{}, im_fOutlineThickness{},
+im_sfTxtText{}, im_pFont{}, im_VecFPosition{},
+im_VecFSize{}, im_sfCrColor{}, im_sfCrColorHover{}, im_sfCrColorOutline{} {}
 InterfaceUI::~InterfaceUI() = default;
 
 
 void InterfaceUI::setFont(const sf::Font & font) {
-    this->m_pFont = font;
+    this->im_pFont = font;
 }
 void InterfaceUI::setString(const std::string &strString) {
-    m_sfTxtText.setString(strString);
+    im_sfTxtText.setString(strString);
 }
 void InterfaceUI::setCharacterSize(const unsigned int iSize) {
-    m_sfTxtText.setCharacterSize(iSize);
+    im_sfTxtText.setCharacterSize(iSize);
 }
 void InterfaceUI::setPosition(const sf::Vector2f sfVecFValue) {
-    this->m_VecFPosition = sfVecFValue;
+    this->im_VecFPosition = sfVecFValue;
 }void InterfaceUI::setSize(const sf::Vector2f sfVecFValue) {
-    this->m_VecFSize = sfVecFValue;
+    this->im_VecFSize = sfVecFValue;
 }
 void InterfaceUI::setFillColor(const sf::Color sfCrColorText) {
-    this->m_sfCrColor = sfCrColorText;
+    this->im_sfCrColor = sfCrColorText;
 }
 void InterfaceUI::setHoverColor(const sf::Color sfCrColorHover) {
-    this->m_sfCrColorHover = sfCrColorHover;
+    this->im_sfCrColorHover = sfCrColorHover;
 }
 void InterfaceUI::setOutlineColor(const sf::Color color) {
-    this->m_sfCrColorOutline = color;
+    this->im_sfCrColorOutline = color;
 }
 
 void InterfaceUI::setOutlineThickness(const float thickness) {
-    this->m_fOutlineThickness = thickness;
+    this->im_fOutlineThickness = thickness;
 }
 
 void InterfaceUI::setText(const sf::Text &text) {
-    this->m_sfTxtText = text;
+    this->im_sfTxtText = text;
 }
 void InterfaceUI::setTIME(const float fTime) {
-    this->m_TIME = fTime;
+    this->im_TIME = fTime;
 }
 
 
 sf::Font InterfaceUI::getFont() const {
- return m_pFont;
+ return im_pFont;
 }
 sf::Color InterfaceUI::getFillColor() const {
-    return m_sfCrColor;
+    return im_sfCrColor;
 }
 sf::Color InterfaceUI::getHoverColor() const {
-    return m_sfCrColorHover;
+    return im_sfCrColorHover;
 }sf::Color InterfaceUI::getOutlineColor() const {
-    return m_sfCrColorOutline;
+    return im_sfCrColorOutline;
 }
 float InterfaceUI::getOutlineThickness() const {
-    return m_fOutlineThickness;
+    return im_fOutlineThickness;
 }
 sf::Vector2f InterfaceUI::getPosition() const {
-    return m_VecFPosition;
+    return im_VecFPosition;
 }sf::Vector2f InterfaceUI::getSize() const {
-    return m_VecFSize;
+    return im_VecFSize;
 }
 std::string InterfaceUI::getString() const {
-    return m_sfTxtText.getString();
+    return im_sfTxtText.getString();
 }
 unsigned int InterfaceUI::getCharacterSize() const {
-    return m_sfTxtText.getCharacterSize();
+    return im_sfTxtText.getCharacterSize();
 }
 sf::Text InterfaceUI::getText() const {
-    return m_sfTxtText;
+    return im_sfTxtText;
 }
 float InterfaceUI::getTIME() const {
-    return m_TIME;
+    return im_TIME;
 }
 
 bool InterfaceUI::collision(const sf::RenderWindow* window, const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
@@ -96,12 +96,12 @@ bool InterfaceUI::collision(const sf::RenderWindow* window, const sf::Vector2f R
 ///
 bool InterfaceUI::buttonPressAndReleaseL() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        if (!LButton) {
-            LButton = true; // Устанавливаем флаг
+        if (!m_bLButton) {
+            m_bLButton = true; // Устанавливаем флаг
             return true;
         }
     } else {
-        LButton = false; // Сбрасываем флаг, если кнопка отпущена
+        m_bLButton = false; // Сбрасываем флаг, если кнопка отпущена
     }
     return false;
 }
@@ -111,12 +111,12 @@ bool InterfaceUI::buttonPressAndReleaseL() {
 ///
 bool InterfaceUI::buttonPressAndReleaseR() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        if (!RButton) {
-            RButton = true; // Устанавливаем флаг
+        if (!m_bRButton) {
+            m_bRButton = true; // Устанавливаем флаг
             return true;
         }
     } else {
-        RButton = false; // Сбрасываем флаг, если кнопка отпущена
+        m_bRButton = false; // Сбрасываем флаг, если кнопка отпущена
     }
     return false;
 }

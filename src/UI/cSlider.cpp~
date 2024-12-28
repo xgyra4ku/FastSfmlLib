@@ -102,7 +102,7 @@ namespace fs::UI {
         // Запоминаем общий размер
         m_VecFSize = sfVecFValue;
         m_sfRsRectangleShape[0].setSize(sf::Vector2f(sfVecFValue.x, sfVecFValue.y / 5));
-        float xx = (sfVecFValue.x > sfVecFValue.y) ? 2.5f : 1.5f;
+        float xx = (sfVecFValue.x > sfVecFValue.y) ? 3.f : 1.5f;
 
         m_sfRsRectangleShape[1].setSize(sf::Vector2f(
             (sfVecFValue.x / 15.0f < sfVecFValue.y / xx) ? sfVecFValue.x / 15.0f : sfVecFValue.y / xx,

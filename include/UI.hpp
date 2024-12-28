@@ -8,18 +8,18 @@
 /// InterfaceUI class
 ///
 class InterfaceUI {
-    bool LButton;
-    bool RButton;
+    bool m_bLButton;
+    bool m_bRButton;
 protected:
-    float m_TIME = 0;
-    float m_fOutlineThickness = 0;
-    sf::Text m_sfTxtText;
-    sf::Font m_pFont;
-    sf::Vector2f m_VecFPosition;
-    sf::Vector2f m_VecFSize;
-    sf::Color m_sfCrColor;
-    sf::Color m_sfCrColorHover;
-    sf::Color m_sfCrColorOutline;
+    float im_TIME = 0;
+    float im_fOutlineThickness = 0;
+    sf::Text im_sfTxtText;
+    sf::Font im_pFont;
+    sf::Vector2f im_VecFPosition;
+    sf::Vector2f im_VecFSize;
+    sf::Color im_sfCrColor;
+    sf::Color im_sfCrColorHover;
+    sf::Color im_sfCrColorOutline;
 
     InterfaceUI();
     virtual ~InterfaceUI();
@@ -129,7 +129,7 @@ namespace fs::UI {
         ~Button() override;
         void logic();
         bool getStatus() const;
-        void draw() const;
+        void draw();
 
         void setPosition(sf::Vector2f sfVecFValue) override;
         void setSize(sf::Vector2f sfVecFValue) override;
@@ -138,10 +138,12 @@ namespace fs::UI {
         void setOutlineColor(sf::Color color) override;
         void setOutlineThickness(float thickness) override;
         void setText(const sf::Text &text) override;
+        void setFont(const sf::Font &font) override;
+        void setString(const std::string &strString) override;
+        void setCharacterSize(unsigned int iSize) override;
     private:
         sf::RenderWindow *m_pWindow;
         sf::RectangleShape m_sfRsRectangleShape;
-        sf::Text m_sfText;
         bool m_bStatus;
     };
 }

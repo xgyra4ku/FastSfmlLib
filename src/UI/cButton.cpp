@@ -33,9 +33,16 @@ namespace fs::UI {
     ///
     /// @brief Логика и обработка событий
     ///
-    void Button::draw() const {
-        m_pWindow->draw(m_sfRsRectangleShape);
-        m_pWindow->draw(m_sfText);
+    void Button::draw() {
+        if (m_bStatus) {
+            m_sfRsRectangleShape.setFillColor(im_sfCrColorHover);
+            m_pWindow->draw(m_sfRsRectangleShape);
+            m_pWindow->draw(im_sfTxtText);
+            m_sfRsRectangleShape.setFillColor(im_sfCrColor);
+        } else {
+            m_pWindow->draw(m_sfRsRectangleShape);
+            m_pWindow->draw(im_sfTxtText);
+        }
     }
 
     ///
@@ -48,7 +55,7 @@ namespace fs::UI {
     ///
     void Button::setPosition(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape.setPosition(sfVecFValue);
-        m_VecFPosition = sfVecFValue;
+        im_VecFPosition = sfVecFValue;
     }
 
     //
@@ -56,7 +63,7 @@ namespace fs::UI {
     ///
     void Button::setSize(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape.setSize(sfVecFValue);
-        m_VecFSize = sfVecFValue;
+        im_VecFSize = sfVecFValue;
     }
 
     ///
@@ -64,15 +71,14 @@ namespace fs::UI {
     ///
     void Button::setFillColor(const sf::Color sfCrColorText) {
         m_sfRsRectangleShape.setFillColor(sfCrColorText);
-        m_sfCrColor = sfCrColorText;
+        im_sfCrColor = sfCrColorText;
     }
 
     ///
     /// @brief установка цвета верхнего прямоугольника
     ///
     void Button::setHoverColor(const sf::Color sfCrColorHover) {
-        m_sfText.setFillColor(sfCrColorHover);
-        m_sfCrColorHover = sfCrColorHover;
+        im_sfCrColorHover = sfCrColorHover;
     }
 
     ///
@@ -80,7 +86,7 @@ namespace fs::UI {
     ///
     void Button::setOutlineColor(const sf::Color color) {
         m_sfRsRectangleShape.setOutlineColor(color);
-        m_sfCrColorOutline = color;
+        im_sfCrColorOutline = color;
     }
 
     ///
@@ -88,6 +94,32 @@ namespace fs::UI {
     ///
     void Button::setOutlineThickness(const float thickness) {
         m_sfRsRectangleShape.setOutlineThickness(thickness);
-        m_fOutlineThickness = thickness;
+        im_fOutlineThickness = thickness;
+    }
+
+    ///
+    /// @brief установка шрифта
+    ///
+    void Button::setFont(const sf::Font &font) {
+        im_sfTxtText.setFont(font);
+        im_pFont = font;
+    }
+
+    ///
+    /// @brief установка текста
+    ///
+    void Button::setText(const sf::Text &text) {
+        im_sfTxtText = text;
+    }
+
+    void Button::setString(const std::string &strString) {
+        im_sfTxtText.setString(strString);
+    }
+
+    ///
+    /// @brief установка размера шрифта
+    ///
+    void Button::setCharacterSize(const unsigned int iSize) {
+        im_sfTxtText.setCharacterSize(iSize);
     }
 }

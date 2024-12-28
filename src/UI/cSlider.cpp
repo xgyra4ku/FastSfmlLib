@@ -89,10 +89,10 @@ namespace fs::UI {
     void Slider::setPosition(const sf::Vector2f sfVecFValue) {
         // Устанавливаем позицию для первого (горизонтального) прямоугольника
         m_sfRsRectangleShape[1].setPosition(sfVecFValue);
-        m_sfRsRectangleShape[0].setPosition({sfVecFValue.x, (sfVecFValue.y + m_VecFSize.y / 2.45f)});
+        m_sfRsRectangleShape[0].setPosition({sfVecFValue.x, (sfVecFValue.y + im_VecFSize.y / 2.45f)});
 
         // Запоминаем общую позицию
-        m_VecFPosition = sfVecFValue;
+        im_VecFPosition = sfVecFValue;
     }
 
     ///
@@ -100,7 +100,7 @@ namespace fs::UI {
     ///
     void Slider::setSize(const sf::Vector2f sfVecFValue) {
         // Запоминаем общий размер
-        m_VecFSize = sfVecFValue;
+        im_VecFSize = sfVecFValue;
         m_sfRsRectangleShape[0].setSize(sf::Vector2f(sfVecFValue.x, sfVecFValue.y / 5));
         float xx = (sfVecFValue.x > sfVecFValue.y) ? 3.f : 1.5f;
 
@@ -117,7 +117,7 @@ namespace fs::UI {
     ///
     void Slider::setFillColor(const sf::Color sfCrColorText) {
         m_sfRsRectangleShape[0].setFillColor(sfCrColorText);
-        m_sfCrColor = sfCrColorText;
+        im_sfCrColor = sfCrColorText;
     }
 
     ///
@@ -125,7 +125,7 @@ namespace fs::UI {
     ///
     void Slider::setHoverColor(const sf::Color sfCrColorHover) {
         m_sfRsRectangleShape[1].setFillColor(sfCrColorHover);
-        m_sfCrColorHover = sfCrColorHover;
+        im_sfCrColorHover = sfCrColorHover;
     }
 
     ///
