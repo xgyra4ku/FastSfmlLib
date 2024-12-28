@@ -137,11 +137,12 @@ namespace fs::UI {
         void setHoverColor(sf::Color sfCrColorHover) override;
         void setOutlineColor(sf::Color color) override;
         void setOutlineThickness(float thickness) override;
+        void setText(const sf::Text &text) override;
     private:
         sf::RenderWindow *m_pWindow;
         sf::RectangleShape m_sfRsRectangleShape;
+        sf::Text m_sfText;
         bool m_bStatus;
-        bool m_buttonL;
     };
 }
 

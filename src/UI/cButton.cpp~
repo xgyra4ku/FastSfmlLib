@@ -60,7 +60,7 @@ namespace fs::UI {
         m_VecFPosition = sfVecFValue;
     }
 
-    ///
+    //
     /// @brief установка размера кнопки
     ///
     void Button::setSize(const sf::Vector2f sfVecFValue) {
