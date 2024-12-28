@@ -74,7 +74,6 @@ namespace fs::UI {
         ~Switch() override;
         void logic();
         bool getStatus() const;
-        void setStatus(bool bStatus);
         void draw() const;
 
         void setPosition(sf::Vector2f sfVecFValue) override;

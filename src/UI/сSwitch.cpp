@@ -50,6 +50,11 @@ namespace fs::UI {
     bool Switch::getStatus() const { return m_bStatus; }
 
     ///
+    /// @brief установка статуса кнопки
+    ///
+    void Switch::setStatus(const bool bStatus) { m_bStatus = bStatus; }
+
+    ///
     /// @brief установка позиции кнопки
     ///
     void Switch::setPosition(const sf::Vector2f sfVecFValue) {
