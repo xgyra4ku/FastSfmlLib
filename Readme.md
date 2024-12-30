@@ -1,160 +1,180 @@
-# LibKyraText
+![wmremove-transformed_preview_rev_1](https://github.com/user-attachments/assets/fa6f34d1-2483-425a-9cab-26ca2789f133)
 
-LibKyraText — это простая библиотека для ввода текста, основанная на SFML. Она предоставляет удобный интерфейс для управления текстовым вводом в графических приложениях. Библиотека позволяет захватывать ввод с клавиатуры, отображать текст и настраивать его внешний вид.
+# FastSfml
 
-## Особенности
+FastSfml is a library designed to simplify the creation of games using [SFML](https://www.sfml-dev.org/) (Simple and Fast Multimedia Library). It provides developers with intuitive and ready-to-use components to handle common UI and input tasks, reducing boilerplate code and accelerating development.
 
-- Захват текстового ввода с клавиатуры.
-- Поддержка базового редактирования текста (например, удаление символов).
-- Отображение текста и прямоугольной области с настраиваемыми цветами, шрифтами и размерами.
-- Возможность включения и отключения текстового ввода.
-- Простая интеграция с `RenderWindow` из SFML.
+---
 
-## Зависимости
+## Key Features
 
-- [SFML](https://www.sfml-dev.org/) (Simple and Fast Multimedia Library)
+### Mouse Handling
+FastSfml makes mouse input management simple and efficient. It abstracts common tasks, such as tracking mouse clicks and movement, and provides straightforward interfaces for developers to integrate into their projects.
 
-## Установка
+### UI Components
+FastSfml includes a set of powerful UI elements:
 
-1. Установите SFML на свою систему.
-2. Склонируйте или загрузите этот репозиторий.
-3. Добавьте файлы `LibKyraText.h` и `LibKyraText.cpp` в свой проект.
-4. При компиляции вашего проекта свяжите его с библиотеками SFML.
+- **Button**: A clickable UI element that can be customized with different colors, sizes, fonts, and hover effects. Developers can attach logic to button states for seamless interactivity.
+- **Slider**: A convenient slider element for selecting numeric values within a range. It supports setting dimensions, positions, and specific step options.
+- **Switch**: A toggleable UI component with customizable appearance, useful for binary options like enabling/disabling features.
 
-## Использование
+### Text Handling
+FastSfml simplifies text input and management with the `InputText` component. This feature allows developers to create text input fields with:
 
-### Инициализация
+- Customizable fonts and sizes.
+- Dynamic text capturing and rendering.
+- Adjustable positioning and bounding boxes.
 
-Для использования класса `cInputText` создайте его экземпляр и настройте его свойства по своему усмотрению:
+These features make it easy to implement text-based interactions in games, such as chat systems or user settings.
 
-```
-#include "LibKyraText.h"
+---
+
+## Installation
+
+Currently, FastSfml is distributed as source code. To use it:
+1. Download the library files.
+2. Include the header files in your project.
+3. Ensure you have [SFML 2.5.1](https://www.sfml-dev.org/download.php) or newer installed.
+
+---
+
+## Example Usage
+
+Below is a detailed example demonstrating how to use FastSfml in a game project:
+
+```cpp
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include "FastSfml.hpp"
 
-ktx::cInputText inputText;
-inputText.setRectSize(sf::Vector2f(300, 50));
-inputText.setColorText(sf::Color::Black);
-inputText.setColorRect(sf::Color::White);
-```
-## Обработка ввода
-Метод ```readKey()``` обрабатывает ввод с клавиатуры, а метод ```setInput()``` включает или отключает возможность ввода текста:
-```
-// Включить ввод
-inputText.setInput(true);
-// В игровом цикле обновляйте ввод текста, передавая значение времени
-inputText.readKey(elapsedTime);
-```
-## Отрисовка
-```
-Метод draw() используется для отрисовки текста и фона на экране с помощью RenderWindow из SFML:
-// В цикле отрисовки
-window.clear();
-inputText.draw(window);
-window.display();
-```
-Настройки
-Позиция текста: ```setPositionText(sf::Vector2f)```
+float fTime = 0;
+sf::Clock oClock;
 
-Позиция прямоугольника: ```setPositionRectangleShape(sf::Vector2f)```
+void time_func()
+{
+    fTime = oClock.getElapsedTime().asMicroseconds();
+    oClock.restart();
 
-Шрифт: ```setFont(const sf::Font&)```
+    fTime = fTime / 1000;
 
-Цвет текста: ```setColorText(sf::Color)```
+    if (fTime > 20) fTime = 20;
+}
 
-Цвет прямоугольника: ```setColorRect(sf::Color)```
-
-Размер текста: ```setCharacterSize(unsigned int)```
-
-
-## Пример
-
-```
-#include <SFML/Graphics.hpp>
-#include "LibKyraText.h"
-
-int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "LibKyraText Example");
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(1280, 800), "window");
     sf::Font font;
-    font.loadFromFile("path/to/font.ttf");
-
-    ktx::cInputText inputText;
-    inputText.setRectSize(sf::Vector2f(300, 50));
-    inputText.setPositionRectangleShape(sf::Vector2f(100, 100));
-    inputText.setFont(font);
-    inputText.setInput(true);
-
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        inputText.readKey(1.0f); // Обновление ввода
-
-        window.clear();
-        inputText.draw(window); // Отрисовка текста и фона
-        window.display();
+    if (!font.loadFromFile("fonts/arial.ttf"))
+    {
+        std::cout << "Error loading font" << std::endl;
+        return EXIT_FAILURE;
     }
 
-    return 0;
+    fs::Text::InputText inputText;
+    fs::Mouse mouse(window);
+    fs::UI::Switch switch_(window);
+    fs::UI::Slider slider(window);
+    fs::UI::Button button(window);
+
+    // Configure the switch
+    switch_.setPosition(sf::Vector2f(400, 400));
+    switch_.setSize(sf::Vector2f(300, 70));
+    switch_.setFillColor(sf::Color::White);
+    switch_.setHoverColor(sf::Color(40, 40, 40));
+    switch_.setOutlineColor(sf::Color::White);
+    switch_.setOutlineThickness(2.0f);
+
+    // Configure the text input
+    inputText.setFont(font);
+    inputText.setCharacterSize(40);
+    inputText.setRectSize(sf::Vector2f(300, 70));
+    inputText.setPosition(sf::Vector2f(70, 70));
+
+    // Configure the slider
+    slider.setSize({100, 30});
+    slider.setPosition({300, 600});
+    slider.setOption(20);
+
+    // Configure the button
+    button.setPosition({600, 600});
+    button.setSize({100, 30});
+    button.setFont(font);
+    button.setString("Button");
+    button.setCharacterSize(10);
+    button.setTextPosition({600, 600});
+    button.setTextColor(sf::Color::Green);
+    button.setFillColor(sf::Color::White);
+    button.setHoverColor(sf::Color(40, 40, 40});
+
+    while (window.isOpen())
+    {
+        time_func();
+        inputText.listen(fTime);
+        mouse.listen();
+        switch_.logic();
+        slider.logic();
+        button.logic();
+
+        sf::Event event{};
+
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+        }
+
+        if (switch_.getStatus()) {
+            inputText.setInput(true);
+        } else {
+            inputText.setInput(false);
+        }
+
+        if (button.getStatus()) {
+            std::cout << "Button" << std::endl;
+        }
+
+        window.clear(sf::Color(33, 31, 48));
+
+        inputText.draw(window);
+        switch_.draw();
+        slider.draw();
+        button.draw();
+
+        window.display();
+    }
 }
 ```
-## Документация API
-### Методы
-```void readKey(float l_fTime)```
-Обрабатывает ввод с клавиатуры с учетом времени.
 
-```void draw(sf::RenderWindow& window) const```
-Отрисовывает прямоугольник и текст в указанном окне SFML.
+This example illustrates the use of multiple UI elements and demonstrates their interactivity in a game environment.
 
-```void setRectSize(sf::Vector2f l_RectSize)```
-Устанавливает размер прямоугольника.
+---
 
-```void setColorText(sf::Color l_ColorText)```
-Устанавливает цвет текста.
+## Dependencies
 
-```void setColorRect(sf::Color l_ColorRect)```
-Устанавливает цвет прямоугольника.
+- [SFML 2.5.1](https://www.sfml-dev.org/) or newer.
 
-```void setFont(const sf::Font& l_Font)```
-Устанавливает шрифт для текста.
+---
 
-```void setString(const std::string& l_String)```
-Устанавливает начальную строку текста.
+## License
 
-```void setPositionText(sf::Vector2f l_pos)```
-Устанавливает позицию текста.
+This library is free to use, modify, and distribute. Feel free to adapt it to your needs.
 
-```void setPositionRectangleShape(sf::Vector2f l_pos)```
-Устанавливает позицию прямоугольника.
+---
 
-```void setCharacterSize(unsigned int l_size)```
-Устанавливает размер текста.
+## Future Documentation
 
-```void setInput(bool l_bool)```
-Включает или отключает ввод текста.
+Detailed documentation will be available in future releases. It will include:
+- Full API references.
+- Additional usage examples.
+- Tips and tricks for customizing UI components.
 
-```sf::Vector2f getRectSize() const```
-Возвращает размер прямоугольника.
+---
 
-```sf::Color getColorText() const```
-Возвращает текущий цвет текста.
+## Multilingual README
 
-```sf::Color getColorRect() const```
-Возвращает текущий цвет прямоугольника.
+This README is available in both English and Russian.
 
-```std::string getString() const```
-Возвращает текущую строку текста.
+---
 
-```sf::Vector2f getPositionText() const```
-Возвращает текущую позицию текста.
-
-```sf::Vector2f getPositionRectangleShape() const```
-Возвращает текущую позицию прямоугольника.
-
-```unsigned int getCharacterSize() const```
-Возвращает текущий размер текста.
-
-```bool getInput() const```
-Возвращает статус ввода текста (включен или выключен).
