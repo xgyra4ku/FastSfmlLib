@@ -29,7 +29,7 @@ namespace fs::UI {
     /// @brief Логика и обработка событий
     ///
     void Switch::logic() {
-        if (buttonPressAndReleaseL()) {
+        if (buttonPressOneAction()) {
             if (collision(m_pWindow, m_sfRsRectangleShape[0].getSize(), m_sfRsRectangleShape[0].getPosition())) {
                 m_bStatus = !m_bStatus;
             }

@@ -60,7 +60,7 @@ namespace fs::UI {
     void Switch::setPosition(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape[0].setPosition(sfVecFValue);
         m_sfRsRectangleShape[1].setPosition(sfVecFValue);
-        m_VecFPosition = sfVecFValue;
+        im_VecFPosition = sfVecFValue;
     }
 
     ///
@@ -69,7 +69,7 @@ namespace fs::UI {
     void Switch::setSize(const sf::Vector2f sfVecFValue) {
         m_sfRsRectangleShape[0].setSize(sfVecFValue);
         m_sfRsRectangleShape[1].setSize(sfVecFValue);
-        m_VecFSize = sfVecFValue;
+        im_VecFSize = sfVecFValue;
     }
 
     ///
@@ -78,7 +78,7 @@ namespace fs::UI {
     void Switch::setFillColor(const sf::Color sfCrColorText) {
         m_sfRsRectangleShape[0].setFillColor(sfCrColorText);
         m_sfRsRectangleShape[0].setOutlineColor(sfCrColorText);
-        m_sfCrColor = sfCrColorText;
+        im_sfCrColor = sfCrColorText;
     }
 
     ///
@@ -86,7 +86,7 @@ namespace fs::UI {
     ///
     void Switch::setHoverColor(const sf::Color sfCrColorHover) {
         m_sfRsRectangleShape[1].setFillColor(sfCrColorHover);
-        m_sfCrColorHover = sfCrColorHover;
+        im_sfCrColorHover = sfCrColorHover;
     }
 
     ///
@@ -94,7 +94,7 @@ namespace fs::UI {
     ///
     void Switch::setOutlineColor(const sf::Color color) {
         m_sfRsRectangleShape[1].setOutlineColor(color);
-        m_sfCrColorOutline = color;
+        im_sfCrColorOutline = color;
     }
 
     ///
@@ -103,7 +103,7 @@ namespace fs::UI {
     void Switch::setOutlineThickness(const float thickness) {
         m_sfRsRectangleShape[0].setOutlineThickness(thickness);
         m_sfRsRectangleShape[1].setOutlineThickness(thickness);
-        m_fOutlineThickness = thickness;
+        im_fOutlineThickness = thickness;
     }
 
 

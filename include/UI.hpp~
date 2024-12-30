@@ -146,7 +146,6 @@ namespace fs::UI {
         void setString(const std::string &strString) override;
         void setCharacterSize(unsigned int iSize) override;
         void setTextPosition(sf::Vector2f sfVecFValue) override;
-        void setTextColor(sf::Color color) override;
     private:
         sf::RenderWindow *m_pWindow;
         sf::RectangleShape m_sfRsRectangleShape;

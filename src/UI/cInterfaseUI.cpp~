@@ -132,30 +132,22 @@ float InterfaceUI::getOutlineThickness() const {
     return im_fOutlineThickness;
 }
 
-///
-/// @return позиция
-///
+
 sf::Vector2f InterfaceUI::getPosition() const {
     return im_VecFPosition;
 }
 
-///
-/// @return размер
-///
+
 sf::Vector2f InterfaceUI::getSize() const {
     return im_VecFSize;
 }
 
-///
-/// @return текст
-///
+
 std::string InterfaceUI::getString() const {
     return im_sfTxtText.getString();
 }
 
-///
-/// @return размер шрифта
-///
+
 unsigned int InterfaceUI::getCharacterSize() const {
     return im_sfTxtText.getCharacterSize();
 }
@@ -174,9 +166,7 @@ float InterfaceUI::getTIME() const {
     return im_TIME;
 }
 
-///
-/// @brief колизия мыши с прямоугольником
-///
+
 bool InterfaceUI::collision(const sf::RenderWindow* window, const sf::Vector2f RectSize, const sf::Vector2f RectPosition) {
     // Получаем позицию мыши относительно окна
     const sf::Vector2i mousePos = sf::Mouse::getPosition(*window);

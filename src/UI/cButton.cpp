@@ -26,7 +26,7 @@ namespace fs::UI {
     /// @brief Логика и обработка событий
     ///
     void Button::logic() {
-        if (buttonPressAndReleaseL() && collision(m_pWindow, m_sfRsRectangleShape.getSize(), m_sfRsRectangleShape.getPosition())) m_bStatus = true;
+        if (buttonPressOneAction() && collision(m_pWindow, m_sfRsRectangleShape.getSize(), m_sfRsRectangleShape.getPosition())) m_bStatus = true;
         else m_bStatus = false;
     }
 
@@ -34,12 +34,12 @@ namespace fs::UI {
     /// @brief Логика и обработка событий
     ///
     void Button::draw() {
-        if (m_bStatus) {
+        if (buttonClampingL() && collision(m_pWindow, m_sfRsRectangleShape.getSize(), m_sfRsRectangleShape.getPosition())) {
             m_sfRsRectangleShape.setFillColor(im_sfCrColorHover);
             m_pWindow->draw(m_sfRsRectangleShape);
             m_pWindow->draw(im_sfTxtText);
-            m_sfRsRectangleShape.setFillColor(im_sfCrColor);
         } else {
+            m_sfRsRectangleShape.setFillColor(im_sfCrColor);
             m_pWindow->draw(m_sfRsRectangleShape);
             m_pWindow->draw(im_sfTxtText);
         }
@@ -121,5 +121,19 @@ namespace fs::UI {
     ///
     void Button::setCharacterSize(const unsigned int iSize) {
         im_sfTxtText.setCharacterSize(iSize);
+    }
+
+    ///
+    /// @brief установка позиции текста
+    ///
+    void Button::setTextPosition(const sf::Vector2f sfVecFValue) {
+        im_sfTxtText.setPosition(sfVecFValue);
+    }
+
+    ///
+    /// @brief установка цвета текста
+    ///
+    void Button::setTextColor(const sf::Color color) {
+        im_sfTxtText.setFillColor(color);
     }
 }
