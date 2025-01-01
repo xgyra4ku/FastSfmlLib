@@ -10,17 +10,21 @@
 
 namespace fs {
     class Mouse {
-        bool LButton;
-        bool RButton;
+        bool LButton, m_bLButton;
+        bool RButton, m_bRButton;
         sf::RenderWindow* window;
     public:
 
         explicit Mouse(sf::RenderWindow& sfRwWindow);
         ~Mouse();
         void listen();
-        bool buttonR();
-        bool buttonL();
-        bool collision(sf::Vector2f RectSize, sf::Vector2f RectPosition) const;
+        [[nodiscard]] bool collision(sf::Vector2f RectSize, sf::Vector2f RectPosition) const;
+
+        [[nodiscard]] sf::Vector2f getMousePosition() const;
+        [[nodiscard]] static bool buttonClampingL() ;
+        [[nodiscard]] static bool buttonClampingR() ;
+        bool buttonPressAndReleaseL();
+        bool buttonPressAndReleaseR();
     };
 
 

@@ -15,8 +15,7 @@ namespace fs {
     ///
     /// constructors
     ///
-    Mouse::Mouse(sf::RenderWindow& sfRwWindow) : LButton(false), RButton(false), window(&sfRwWindow) {
-    }
+    Mouse::Mouse(sf::RenderWindow& sfRwWindow) : LButton(false), RButton(false), m_bLButton(false), m_bRButton(false), window(&sfRwWindow) {}
 
     ///
     /// destructor
@@ -49,7 +48,7 @@ namespace fs {
     ///
     /// @brief Левая кнопка мыши нажата
     ///
-    bool Mouse::buttonPressOneAction() {
+    bool Mouse::buttonPressAndReleaseL() {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             if (!m_bLButton) {
                 m_bLButton = true; // Устанавливаем флаг
@@ -92,13 +91,13 @@ namespace fs {
     ///
     /// @brief Получение позиции мыши
     ///
-    sf::Vector2f Mouse::getMousePosition(const sf::RenderWindow* window) {
+    sf::Vector2f Mouse::getMousePosition() const {
         return sf::Vector2f(sf::Mouse::getPosition(*window));
     }
 
-
-
-
+    ///
+    /// @brief прослушивание
+    ///
     void Mouse::listen() {
         LButton = sf::Mouse::Button::Left;
         RButton = sf::Mouse::Button::Right;
