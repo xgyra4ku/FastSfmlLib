@@ -46,18 +46,17 @@ namespace fs {
         return false;
     }
 
-
     ///
     /// @brief Левая кнопка мыши нажата
     ///
-    bool Mouse::buttonL() {
+    bool Mouse::buttonPressOneAction() {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            if (!LButton) {
-                LButton = true; // Устанавливаем флаг
+            if (!m_bLButton) {
+                m_bLButton = true; // Устанавливаем флаг
                 return true;
             }
         } else {
-            LButton = false; // Сбрасываем флаг, если кнопка отпущена
+            m_bLButton = false; // Сбрасываем флаг, если кнопка отпущена
         }
         return false;
     }
@@ -65,16 +64,36 @@ namespace fs {
     ///
     /// @brief Правая кнопка мыши нажата
     ///
-    bool Mouse::buttonR() {
+    bool Mouse::buttonPressAndReleaseR() {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-            if (!RButton) {
-                RButton = true; // Устанавливаем флаг
+            if (!m_bRButton) {
+                m_bRButton = true; // Устанавливаем флаг
                 return true;
             }
         } else {
-            RButton = false; // Сбрасываем флаг, если кнопка отпущена
+            m_bRButton = false; // Сбрасываем флаг, если кнопка отпущена
         }
         return false;
+    }
+
+    ///
+    /// @brief Получение зажатия правой кнопки мыши
+    ///
+    bool Mouse::buttonClampingL() {
+        return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    }
+    ///
+    /// @brief Получение зажатия левой кнопки мыши
+    ///
+    bool Mouse::buttonClampingR() {
+        return sf::Mouse::isButtonPressed(sf::Mouse::Right);
+    }
+
+    ///
+    /// @brief Получение позиции мыши
+    ///
+    sf::Vector2f Mouse::getMousePosition(const sf::RenderWindow* window) {
+        return sf::Vector2f(sf::Mouse::getPosition(*window));
     }
 
 

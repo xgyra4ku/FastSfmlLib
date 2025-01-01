@@ -51,9 +51,13 @@ namespace fs {
     /// @brief Левая кнопка мыши нажата
     ///
     bool Mouse::buttonL() {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !LButton) {
-            LButton = true;
-            return true;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if (!LButton) {
+                LButton = true; // Устанавливаем флаг
+                return true;
+            }
+        } else {
+            LButton = false; // Сбрасываем флаг, если кнопка отпущена
         }
         return false;
     }
@@ -62,12 +66,18 @@ namespace fs {
     /// @brief Правая кнопка мыши нажата
     ///
     bool Mouse::buttonR() {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !RButton) {
-            RButton = true;
-            return true;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+            if (!RButton) {
+                RButton = true; // Устанавливаем флаг
+                return true;
+            }
+        } else {
+            RButton = false; // Сбрасываем флаг, если кнопка отпущена
         }
         return false;
     }
+
+
 
 
     void Mouse::listen() {
