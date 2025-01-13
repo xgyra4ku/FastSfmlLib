@@ -25,7 +25,7 @@ namespace fs::UI {
     ///
     void Slider::logic() {
         //сть встроеные функции buttonClampingL() и buttonPressAndReleaseL()
-        if (buttonPressAndReleaseL()) {
+        if (buttonPressOneAction()) {
             if (collision(m_pWindow, m_sfRsRectangleShape[1].getSize(), m_sfRsRectangleShape[1].getPosition())) m_bInput = true;
             else m_bInput= false;
         }
