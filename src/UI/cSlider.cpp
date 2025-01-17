@@ -77,12 +77,10 @@ namespace fs::UI {
     /// @brief установка статуса кнопки
     ///
     void Slider::setStatus(const int iStatus) {
-        // логика обработки перемешения слайдера
-        const float stepWidth = getSize().x / static_cast<float>(m_iOption);
         m_sfRsRectangleShape[1].setPosition(
-                    m_sfRsRectangleShape[1].getPosition().x + stepWidth*static_cast<float>(iStatus),
-                    m_sfRsRectangleShape[1].getPosition().y
-                );
+            im_VecFPosition.x + static_cast<float>(iStatus) * getSize().x / static_cast<float>(m_iOption),
+            im_VecFPosition.y
+        );
         m_iStatus = iStatus;
     }
 
