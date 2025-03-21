@@ -182,7 +182,7 @@ This README is available in both English and Russian.
 ## RU
 ---
 
-# FastSfml ver2.1.0
+# FastSfml version 2.1.0
 
 FastSfml - это библиотека, предназначенная для упрощения создания игр с использованием [SFML](https://www.sfml-dev.org/) (Simple and Fast Multimedia Library). Она предоставляет разработчикам интуитивно понятные и готовые к использованию компоненты для работы с пользовательским интерфейсом и вводом, сокращая шаблонный код и ускоряя разработку.
 
